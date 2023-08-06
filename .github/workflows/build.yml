@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  plugin_test:
+  plugin-test:
     name: asdf plugin test
     strategy:
       matrix:
@@ -16,7 +16,25 @@ jobs:
           - macos-latest
     runs-on: ${{ matrix.os }}
     steps:
-      - name: asdf_plugin_test
+      - name: Run asdf plugin test
         uses: asdf-vm/actions/plugin-test@v2
         with:
-          command: asdf-plugin-manager --version
+          command: asdf-plugin-manager version
+      - uses: actions/checkout@v3
+      - name: Install asdf-plugin-manager
+        run: |
+          asdf plugin add asdf-plugin-manager .
+          asdf install asdf-plugin-manager latest
+          asdf global asdf-plugin-manager latest
+      - name: Test asdf-plugin-manager
+        run: |
+          cd test
+          asdf-plugin-manager list
+          asdf-plugin-manager add-all
+          asdf plugin list --refs
+      - name: Validate installed plugins
+        run: |
+          set -euox pipefail
+          PLUGIN_GIT_REF=$(grep -oE "[^ ]\w{39}$" test/.plugin-versions)
+          asdf plugin list --refs | grep "${PLUGIN_GIT_REF}" &&
+          echo "[Passed] The plugin git ref in test/.plugin-versions matches the installed one."
