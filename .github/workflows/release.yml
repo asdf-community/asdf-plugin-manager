@@ -6,6 +6,7 @@ on:
       - main
 
 permissions:
+  actions: write
   contents: write
   pull-requests: write
 
@@ -16,3 +17,8 @@ jobs:
       - uses: GoogleCloudPlatform/release-please-action@v3
         with:
           release-type: simple
+      - name: Upload Release Artifact
+        if: ${{ steps.release.outputs.release_created }}
+        run:
+          cp -a cli/asdf-plugin-manager.sh asdf-plugin-manager-${{ steps.release.outputs.tag_name }}.sh
+          gh release upload ${{ steps.release.outputs.tag_name }} asdf-plugin-manager-${{ steps.release.outputs.tag_name }}.sh
