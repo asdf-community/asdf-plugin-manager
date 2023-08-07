@@ -25,12 +25,17 @@ VARS:
 USAGE:
   asdf-plugin-manager help                    : Print this help message
   asdf-plugin-manager version                 : Print asdf-plugin-manager current version
+  asdf-plugin-manager export                  : List currently installed plugins to be used in .plugin-versions
   asdf-plugin-manager list                    : List managed plugins according to .plugin-versions file
   asdf-plugin-manager add <plugin-name>       : Add named plugin according to .plugin-versions file
   asdf-plugin-manager add-all                 : Add all plugins according to .plugin-versions file
   asdf-plugin-manager remove <plugin-name>    : Remove named plugin according to .plugin-versions file
   asdf-plugin-manager remove-all              : Remove all plugins according to .plugin-versions file
 EOF
+}
+
+export_plugins() {
+    asdf plugin-list --refs --urls | tr -s ' ' | cut -d " " -f 1,2,4 | column -t
 }
 
 list_plugins() {
@@ -79,6 +84,9 @@ while test -n "$1"; do
     version | -v)
         print_version
         exit 0
+        ;;
+    export)
+        export_plugins
         ;;
     list)
         list_plugins

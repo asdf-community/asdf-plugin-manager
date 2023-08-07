@@ -5,7 +5,7 @@
 
 Manage [asdf version manager](https://asdf-vm.com) plugins securely and declaratively. **(yes, this is an asdf plugin to manage asdf plugins!)**
 
-Using `asdf-plugin-manager`, you can set plugins Git URL and ref for security and integrity. So it's the only plugin you need to validate manually and the rest are validated via `.plugin-versions` file. Check [usage](#usage) for more details.
+Using `asdf-plugin-manager`, you can set plugins Git URL and ref for security and integrity. So it's the only plugin you need to validate manually and the rest are validated via `.plugin-versions` file. Check [example](#example) for more details.
 </div>
 
 <!-- omit in toc -->
@@ -14,7 +14,8 @@ Using `asdf-plugin-manager`, you can set plugins Git URL and ref for security an
 - [Why?](#why)
 - [Dependencies](#dependencies)
 - [Install](#install)
-- [Usage](#usage)
+- [Example](#example)
+- [Parameters](#parameters)
 - [Known Limitations](#known-limitations)
 - [Contributing](#contributing)
 - [License](#license)
@@ -31,26 +32,23 @@ Hence, `asdf-plugin-manager` fills the gap to manage asdf plugins securely and d
 
 # Dependencies
 
-- [asdf-vm](https://asdf-vm.com/)
-- `bash`, `cat`, `grep`: generic POSIX utilities.
+- [asdf-vm](https://asdf-vm.com/): Tested with `v0.12.0` but probably will work with older versions.
+- `bash`, `cat`, `grep`, `tr`, `cut`, `column`: Generic POSIX utilities.
 - `ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME`: Set default name for the file with the list of managed plugins.
   Default: ".plugin-versions".
 
 # Install
 
-Setup plugin:
+Setup `asdf-plugin-manager` asdf plugin:
 
 ```shell
 asdf plugin add asdf-plugin-manager https://github.com/aabouzaid/asdf-plugin-manager.git
-asdf update asdf-plugin-manager 1.0.0
+asdf plugin update asdf-plugin-manager v1.0.0
 ```
 
-Set asdf-plugin-manager version:
+Setup `asdf-plugin-manager` actual CLI:
 
 ```shell
-# Show all installable versions
-asdf list-all asdf-plugin-manager
-
 # Install specific version
 asdf install asdf-plugin-manager latest
 
@@ -58,23 +56,47 @@ asdf install asdf-plugin-manager latest
 asdf global asdf-plugin-manager latest
 
 # Now asdf-plugin-manager commands are available
-asdf-plugin-manager list
+asdf-plugin-manager version
 ```
 
-# Usage
+# Example
 
-The `.plugin-versions` file syntax:
+Using `asdf-plugin-manager`, the `.plugin-versions` file will be the source of truth for asdf plugins.
+Its syntax as follows:
 
 ```
-# Name  Git URL                                     Git ref (hash or version)
-venom   https://github.com/aabouzaid/asdf-venom.git 2d94d17
+# Plugin name    Git URL                                        Git ref (hash, tag, or branch)
+venom            https://github.com/aabouzaid/asdf-venom.git    2d94d17
 ```
 
-And `asdf-plugin-manager` args:
+You can also export the current added plugins to be managed by `asdf-plugin-manager`:
+
+```shell
+asdf-plugin-manager export > .plugin-versions
+```
+
+From now on, you can use `.plugin-versions` to manage asdf plugins.
+
+```shell
+# Add all plugins according to .plugin-versions file
+asdf-plugin-manager add-all
+```
+
+Or
+
+```shell
+# Add named plugin according to .plugin-versions file
+asdf-plugin-manager add venom
+```
+
+# Parameters
+
+The following all `asdf-plugin-manager` parameters:
 
 ```
 asdf-plugin-manager help                 : Print this help message
 asdf-plugin-manager version              : Print asdf-plugin-manager current version
+asdf-plugin-manager export               : List currently installed plugins to be used in .plugin-versions
 asdf-plugin-manager list                 : List managed plugins according to .plugin-versions file
 asdf-plugin-manager add <plugin-name>    : Add named plugin according to .plugin-versions file
 asdf-plugin-manager add-all              : Add all plugins according to .plugin-versions file
@@ -94,4 +116,4 @@ Contributions of any kind are welcome! See the [contributing guide](contributing
 
 # License
 
-See [LICENSE](LICENSE) © [Ahmed AbouZaid](https://github.com/aabouzaid/)
+See [LICENSE](LICENSE) © [Ahmed AbouZaid](https://github.com/aabouzaid/).
