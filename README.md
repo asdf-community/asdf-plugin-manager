@@ -65,8 +65,9 @@ Using `asdf-plugin-manager`, the `.plugin-versions` file will be the source of t
 Its syntax as follows:
 
 ```
-# Plugin name    Git URL                                        Git ref (hash, tag, or branch)
-venom            https://github.com/aabouzaid/asdf-venom.git    2d94d17
+# plugin-name  git-url                                               git-ref (hash, tag, or branch)
+golang         https://github.com/asdf-community/asdf-golang.git     d8dec15
+terraform      https://github.com/asdf-community/asdf-hashicorp.git  c048526
 ```
 
 You can also export the current added plugins to be managed by `asdf-plugin-manager`:
@@ -86,7 +87,7 @@ Or
 
 ```shell
 # Add named plugin according to .plugin-versions file
-asdf-plugin-manager add venom
+asdf-plugin-manager add golang
 ```
 
 # Parameters
