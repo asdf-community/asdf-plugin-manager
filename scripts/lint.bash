@@ -6,4 +6,4 @@ shellcheck --shell=bash --external-sources \
     scripts/*
 
 shfmt -i 4 --language-dialect bash --diff \
-    ./**/*
+    $(find . -not -path './.git*' -type f -exec sh -c "file '{}' | grep -q 'shell script'" \; -print)

@@ -1,11 +1,15 @@
 <div align="center">
 
 <!-- omit in toc -->
-# asdf-plugin-manager [![Build](https://github.com/aabouzaid/asdf-plugin-manager/actions/workflows/build.yml/badge.svg)](https://github.com/aabouzaid/asdf-plugin-manager/actions/workflows/build.yml) [![Lint](https://github.com/aabouzaid/asdf-plugin-manager/actions/workflows/lint.yml/badge.svg)](https://github.com/aabouzaid/asdf-plugin-manager/actions/workflows/lint.yml)
+# ASDF Plugin Manager [![Build](https://github.com/aabouzaid/asdf-plugin-manager/actions/workflows/build.yml/badge.svg)](https://github.com/aabouzaid/asdf-plugin-manager/actions/workflows/build.yml) [![Lint](https://github.com/aabouzaid/asdf-plugin-manager/actions/workflows/lint.yml/badge.svg)](https://github.com/aabouzaid/asdf-plugin-manager/actions/workflows/lint.yml)
 
-Manage [asdf version manager](https://asdf-vm.com) plugins securely and declaratively.
+<p align="center">
+    <img src="img/asdf-plugin-manager.png" width="100%">
+</p>
 
-Using `asdf-plugin-manager`, you can set plugins Git URL and ref for security and integrity. So it's the only plugin you need to validate manually and the rest are validated via `.plugin-versions` file. Check [example](#example) for more details.
+Manage [asdf](https://asdf-vm.com) plugins securely and declaratively.
+
+Using `asdf-plugin-manager`, you can set asdf plugins Git URL and ref for security and integrity. So it's the only plugin you need to validate manually, and the `.plugin-versions` file will be the source of truth for asdf plugins. Check [example](#example) for more details.
 
 **Yes, this is an asdf plugin to manage asdf plugins!**
 </div>
@@ -39,23 +43,28 @@ Hence, `asdf-plugin-manager` fills the gap to manage asdf plugins securely and d
 
 # Install
 
-Setup `asdf-plugin-manager` asdf plugin:
+> **Note**
+>
+> Remember, `asdf-plugin-manager` is a plugin for asdf and also the actual CLI which actually used to interact with `.plugin-versions` file.
+
+First, setup `asdf-plugin-manager` as asdf plugin in asdf:
 
 ```shell
 asdf plugin add asdf-plugin-manager https://github.com/aabouzaid/asdf-plugin-manager.git
+# Pin the asdf-plugin-manager version using git tag or even better using git hash which is immutable.
 asdf plugin update asdf-plugin-manager v1.0.0
 ```
 
-Setup `asdf-plugin-manager` actual CLI:
+Then, install the actual `asdf-plugin-manager` CLI:
 
 ```shell
 # Install specific version
-asdf install asdf-plugin-manager latest
+asdf install asdf-plugin-manager 1.0.0
 
 # Set a version globally (on your ~/.tool-versions file)
-asdf global asdf-plugin-manager latest
+asdf global asdf-plugin-manager 1.0.0
 
-# Now asdf-plugin-manager commands are available
+# Now asdf-plugin-manager command is available
 asdf-plugin-manager version
 ```
 
