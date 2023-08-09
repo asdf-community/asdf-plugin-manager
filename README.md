@@ -1,7 +1,7 @@
 <div align="center">
 
 <!-- omit in toc -->
-# ASDF Plugin Manager [![Build](https://github.com/aabouzaid/asdf-plugin-manager/actions/workflows/build.yml/badge.svg)](https://github.com/aabouzaid/asdf-plugin-manager/actions/workflows/build.yml) [![Lint](https://github.com/aabouzaid/asdf-plugin-manager/actions/workflows/lint.yml/badge.svg)](https://github.com/aabouzaid/asdf-plugin-manager/actions/workflows/lint.yml)
+# ASDF Plugin Manager [![Build](https://github.com/asdf-community/asdf-plugin-manager/actions/workflows/build.yml/badge.svg)](https://github.com/asdf-community/asdf-plugin-manager/actions/workflows/build.yml) [![Lint](https://github.com/asdf-community/asdf-plugin-manager/actions/workflows/lint.yml/badge.svg)](https://github.com/asdf-community/asdf-plugin-manager/actions/workflows/lint.yml)
 
 <p align="center">
     <img src="img/asdf-plugin-manager.png" width="100%">
@@ -50,7 +50,7 @@ Hence, `asdf-plugin-manager` fills the gap to manage asdf plugins securely and d
 First, setup `asdf-plugin-manager` as asdf plugin in asdf:
 
 ```shell
-asdf plugin add asdf-plugin-manager https://github.com/aabouzaid/asdf-plugin-manager.git
+asdf plugin add asdf-plugin-manager https://github.com/asdf-community/asdf-plugin-manager.git
 # Pin the asdf-plugin-manager version using git tag or even better using git hash which is immutable.
 asdf plugin update asdf-plugin-manager v1.0.0
 ```
@@ -118,7 +118,7 @@ asdf-plugin-manager remove-all           : Remove all plugins according to .plug
 
 Contributions of any kind are welcome! See the [contributing guide](contributing.md).
 
-[Thanks go to these contributors](https://github.com/aabouzaid/asdf-plugin-manager/graphs/contributors)!
+[Thanks go to these contributors](https://github.com/asdf-community/asdf-plugin-manager/graphs/contributors)!
 
 # License
 
