@@ -4,6 +4,7 @@ set -eo pipefail
 
 VERSION=1.0.0
 PLUGIN_VERSIONS_FILENAME="${ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME:-.plugin-versions}"
+ADD_CLEAN="${ASDF_PLUGIN_MANAGER_ADD_CLEAN:-FALSE}"
 
 print_version() {
     echo "${VERSION}"
@@ -21,6 +22,8 @@ Using asdf-plugin-manager, you can set plugins Git URL and ref for security and 
 VARS:
   ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME: Set default name for the file with the list of managed plugins.
                                                 Default: "$(print_plugin_versions_filename)".
+  ASDF_PLUGIN_MANAGER_ADD_CLEAN:                Remove the plugin before adding it if it's already installed.
+                                                Default: "FALSE".
 
 USAGE:
   asdf-plugin-manager help                    : Print this help message
@@ -61,7 +64,9 @@ add_plugins() {
     echo "${managed_plugins}" | while read managed_plugin; do
         read -r plugin_name plugin_url plugin_ref < <(echo ${managed_plugin})
         echo "[INFO] Adding: ${plugin_name} ${plugin_url} ${plugin_ref}"
-        remove_plugins "$(list_plugins ${plugin_name})"
+        if [[ "${ADD_CLEAN,,}" == 'true' ]]; then
+            remove_plugins "$(list_plugins ${plugin_name})"
+        fi
         asdf plugin add "${plugin_name}" "${plugin_url}"
         # TODO: Remove the plugin update once asdf supports adding plugin with git-ref.
         # https://github.com/asdf-vm/asdf/pull/1204
