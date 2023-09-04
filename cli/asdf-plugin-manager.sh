@@ -32,9 +32,23 @@ USAGE:
   asdf-plugin-manager list                    : List plugins in .plugin-versions file
   asdf-plugin-manager add <plugin-name>       : Add named plugin according to .plugin-versions file
   asdf-plugin-manager add-all                 : Add all plugins according to .plugin-versions file
+  asdf-plugin-manager update <plugin-name>    : Update named plugin to latest in the system and in the .plugin-versions file
+  asdf-plugin-manager update-all              : Update all plugins to latest in the system and in the .plugin-versions file
   asdf-plugin-manager remove <plugin-name>    : Remove named plugin according to .plugin-versions file
   asdf-plugin-manager remove-all              : Remove all plugins according to .plugin-versions file
 EOF
+}
+
+print_git_compare_url() {
+    local provider_url="$1"
+    local plugin_ref_current="$2"
+    local plugin_ref_head="$3"
+
+    if $(echo "${provider_url}" | grep -q 'github'); then
+        echo "${plugin_url%.*}/compare/${plugin_ref_current}...${plugin_ref_head}"
+    elif $(echo "${provider_url}" | grep -q 'gitlab'); then
+        echo "${plugin_url%.*}/-/compare/${plugin_ref_current}...${plugin_ref_head}"
+    fi
 }
 
 export_plugins() {
@@ -75,6 +89,27 @@ add_plugins() {
     done
 }
 
+update_plugins() {
+    local managed_plugins="$1"
+    echo "${managed_plugins}" | while read managed_plugin; do
+        read -r plugin_name plugin_url plugin_ref_current < <(echo ${managed_plugin})
+
+        echo "[INFO] Updating: ${plugin_name} ${plugin_url} ${plugin_ref_current} to HEAD"
+        asdf plugin update "${plugin_name}"
+        plugin_ref_head="$(export_plugins | egrep "^\b${plugin_name}\b\s+" | sed -e 's/^.*\s//')"
+
+        echo "[INFO] Updating git-ref in plugin version file: ${PLUGIN_VERSIONS_FILENAME}"
+        sed -i "/^\b${plugin_name}\b/ s/${plugin_ref_current}/${plugin_ref_head}/" "${PLUGIN_VERSIONS_FILENAME}"
+
+        echo '!!!'
+        echo '[CAUTION] Please review the changes since last update:'
+        echo "$(print_git_compare_url ${plugin_url} ${plugin_ref_current} ${plugin_ref_head})"
+        echo '!!!'
+
+        echo "[INFO] Done."
+    done
+}
+
 if [[ -z $1 ]]; then
     print_help
     exit 1
@@ -101,6 +136,12 @@ while test -n "$1"; do
         ;;
     add-all)
         add_plugins "$(list_plugins)"
+        ;;
+    update)
+        update_plugins "$(list_plugins $2)"
+        ;;
+    update-all)
+        update_plugins "$(list_plugins)"
         ;;
     remove)
         remove_plugins "$(list_plugins $2)"

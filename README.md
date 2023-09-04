@@ -37,7 +37,7 @@ Hence, `asdf-plugin-manager` fills the gap to manage asdf plugins securely and d
 # Dependencies
 
 - [asdf-vm](https://asdf-vm.com/): Tested with `v0.12.0` but probably will work with older versions.
-- `bash`, `cat`, `grep`, `tr`, `cut`, `column`: Generic POSIX utilities.
+- `bash`, `cat`, `grep`, `tr`, `cut`, `column`, `sed`: Generic POSIX utilities.
 - `ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME`: Set default name for the file with the list of managed plugins.
   Default: `.plugin-versions`.
 
