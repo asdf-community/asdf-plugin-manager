@@ -82,7 +82,7 @@ add_plugins() {
     echo "${managed_plugins}" | while read managed_plugin; do
         read -r plugin_name plugin_url plugin_ref < <(echo ${managed_plugin})
         echo "[INFO] Adding: ${plugin_name} ${plugin_url} ${plugin_ref}"
-        if [[ "${ADD_CLEAN,,}" == 'true' ]]; then
+        if [[ "$(echo ${ADD_CLEAN} | tr '[:upper:]' '[:lower:]')" == 'true' ]]; then
             remove_plugins "$(list_plugins ${plugin_name})"
         fi
         asdf plugin add "${plugin_name}" "${plugin_url}"
