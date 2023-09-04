@@ -16,8 +16,10 @@ print_plugin_versions_filename() {
 
 print_help() {
     cat <<EOF
-Manage asdf plugins securely and declaratively via .plugin-versions file.
-Using asdf-plugin-manager, you can set plugins Git URL and ref for security and integrity.
+asdf-plugin-manager
+
+Manage asdf plugins securely and declaratively via ".plugin-versions" file.
+Using asdf-plugin-manager, you can set plugins Git URL and Ref for security and integrity.
 
 VARS:
   ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME: Set default name for the file with the list of managed plugins.
@@ -37,6 +39,8 @@ USAGE:
   asdf-plugin-manager remove <plugin-name>    : Remove named plugin according to .plugin-versions file
   asdf-plugin-manager remove-all              : Remove all plugins according to .plugin-versions file
 EOF
+
+    exit 1
 }
 
 print_git_compare_url() {
@@ -98,8 +102,8 @@ update_plugins() {
         asdf plugin update "${plugin_name}"
         plugin_ref_head="$(export_plugins | egrep "^\b${plugin_name}\b\s+" | sed -e 's/^.*\s//')"
 
-        echo "[INFO] Updating git-ref in plugin version file: ${PLUGIN_VERSIONS_FILENAME}"
-        sed -i "/^\b${plugin_name}\b/ s/${plugin_ref_current}/${plugin_ref_head}/" "${PLUGIN_VERSIONS_FILENAME}"
+        echo "[INFO] Updating git-ref in plugin version file: $(print_plugin_versions_filename)"
+        sed -i "/^\b${plugin_name}\b/ s/${plugin_ref_current}/${plugin_ref_head}/" "$(print_plugin_versions_filename)"
 
         echo '!!!'
         echo '[CAUTION] Please review the changes since last update:'
@@ -112,14 +116,12 @@ update_plugins() {
 
 if [[ -z $1 ]]; then
     print_help
-    exit 1
 fi
 
 while test -n "$1"; do
     case "$1" in
     help | -h)
         print_help
-        exit 1
         ;;
     version | -v)
         print_version
@@ -132,19 +134,25 @@ while test -n "$1"; do
         list_plugins
         ;;
     add)
+        test -n "$2" || print_help
         add_plugins "$(list_plugins $2)"
+        shift
         ;;
     add-all)
         add_plugins "$(list_plugins)"
         ;;
     update)
+        test -n "$2" || print_help
         update_plugins "$(list_plugins $2)"
+        shift
         ;;
     update-all)
         update_plugins "$(list_plugins)"
         ;;
     remove)
+        test -n "$2" || print_help
         remove_plugins "$(list_plugins $2)"
+        shift
         ;;
     remove-all)
         remove_plugins "$(list_plugins)"
@@ -152,7 +160,6 @@ while test -n "$1"; do
     *)
         echo "Unknown argument: $1"
         print_help
-        exit 1
         ;;
     esac
     shift
