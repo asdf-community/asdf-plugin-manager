@@ -96,18 +96,24 @@ add_plugins() {
 update_plugins() {
     local managed_plugins="$1"
     echo "${managed_plugins}" | while read managed_plugin; do
-        read -r plugin_name plugin_url plugin_ref_current < <(echo ${managed_plugin})
+        read -r plugin_name plugin_url plugin_ref_managed < <(echo ${managed_plugin})
 
-        echo "[INFO] Updating: ${plugin_name} ${plugin_url} ${plugin_ref_current} to HEAD"
+        echo "[INFO] Updating: ${plugin_name} ${plugin_url} ${plugin_ref_managed} to HEAD"
+        plugin_ref_before_update="$(export_plugins | egrep "^\b${plugin_name}\b\s+" | sed -e 's/^.*\s//')"
         asdf plugin update "${plugin_name}"
-        plugin_ref_head="$(export_plugins | egrep "^\b${plugin_name}\b\s+" | sed -e 's/^.*\s//')"
+        plugin_ref_after_update="$(export_plugins | egrep "^\b${plugin_name}\b\s+" | sed -e 's/^.*\s//')"
+
+        if [[ "${plugin_ref_before_update}" == "${plugin_ref_after_update}" ]]; then
+            echo "[INFO] The plugin \"${plugin_name}\" with git-ref \"${plugin_ref_managed}\" is already up-to-date."
+            exit 0
+        fi
 
         echo "[INFO] Updating git-ref in plugin version file: $(print_plugin_versions_filename)"
-        sed -i "/^\b${plugin_name}\b/ s/${plugin_ref_current}/${plugin_ref_head}/" "$(print_plugin_versions_filename)"
+        sed -i "/^\b${plugin_name}\b/ s/${plugin_ref_managed}/${plugin_ref_after_update}/" "$(print_plugin_versions_filename)"
 
         echo '!!!'
-        echo '[CAUTION] Please review the changes since last update:'
-        echo "$(print_git_compare_url ${plugin_url} ${plugin_ref_current} ${plugin_ref_head})"
+        echo "[CAUTION] Please review the changes since last update:"
+        echo "$(print_git_compare_url ${plugin_url} ${plugin_ref_managed} ${plugin_ref_after_update})"
         echo '!!!'
 
         echo "[INFO] Done."
