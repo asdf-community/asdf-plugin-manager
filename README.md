@@ -110,6 +110,8 @@ asdf-plugin-manager export               : List currently installed plugins to b
 asdf-plugin-manager list                 : List plugins in .plugin-versions file
 asdf-plugin-manager add <plugin-name>    : Add named plugin according to .plugin-versions file
 asdf-plugin-manager add-all              : Add all plugins according to .plugin-versions file
+asdf-plugin-manager update <plugin-name> : Update named plugin to latest in the system and in the .plugin-versions file
+asdf-plugin-manager update-all           : Update all plugins to latest in the system and in the .plugin-versions file
 asdf-plugin-manager remove <plugin-name> : Remove named plugin according to .plugin-versions file
 asdf-plugin-manager remove-all           : Remove all plugins according to .plugin-versions file
 ```
