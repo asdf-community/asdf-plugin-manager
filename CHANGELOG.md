@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/asdf-community/asdf-plugin-manager/compare/v1.1.0...v1.1.1) (2023-09-04)
+
+
+### Bug Fixes
+
+* use syntax compatible with bash 3 ([#19](https://github.com/asdf-community/asdf-plugin-manager/issues/19)) ([85fbefd](https://github.com/asdf-community/asdf-plugin-manager/commit/85fbefda14280f0eb226c950d880c58ec1410e6f))
+
 ## [1.1.0](https://github.com/asdf-community/asdf-plugin-manager/compare/v1.0.0...v1.1.0) (2023-09-04)
 
 ### Refactor
