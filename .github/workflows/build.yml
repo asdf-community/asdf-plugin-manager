@@ -17,7 +17,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Run asdf plugin test
-        uses: asdf-vm/actions/plugin-test@v2
+        uses: asdf-vm/actions/plugin-test@v3
         with:
           command: asdf-plugin-manager version
       - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
