@@ -56,7 +56,23 @@ print_git_compare_url() {
 }
 
 export_plugins() {
-    asdf plugin-list --refs --urls | tr -s ' ' | cut -d ' ' -f 1,2,4 | column -t
+	local plugins_path
+	local plugins_info
+   	local git_ref
+	local git_url
+   	local output
+   	local path_temp
+
+	path_temp="$(asdf info | grep 'ASDF_DATA_DIR')/plugins"
+	plugins_path="${path_temp//ASDF_DATA_DIR=/}"
+	plugins_info=$(asdf plugin-list --urls | tr -s ' ' | cut -d ' ' -f 1,2 | column -t)
+
+	while read -r plugin git_url; do
+		git_ref=$(git --git-dir "${plugins_path}"/"${plugin}"/.git rev-parse HEAD)
+		output+="$plugin $git_url $git_ref\n"
+	done <<<"$plugins_info"
+
+	echo -e "$output" | column -t
 }
 
 list_plugins() {
