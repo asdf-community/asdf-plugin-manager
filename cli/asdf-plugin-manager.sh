@@ -65,7 +65,7 @@ export_plugins() {
 
 	path_temp="$(asdf info | grep 'ASDF_DATA_DIR')/plugins"
 	plugins_path="${path_temp//ASDF_DATA_DIR=/}"
-	plugins_info=$(asdf plugin-list --urls | tr -s ' ' | cut -d ' ' -f 1,2 | column -t)
+	plugins_info=$(asdf plugin-list --urls | tr -s ' ' | cut -d ' ' -f 1,2)
 
 	while read -r plugin git_url; do
 		git_ref=$(git --git-dir "${plugins_path}"/"${plugin}"/.git rev-parse HEAD)
