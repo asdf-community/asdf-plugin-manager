@@ -38,6 +38,6 @@ jobs:
       - name: Validate installed plugins
         run: |
           set -euox pipefail
-          PLUGIN_GIT_REF=$(grep -oE "[^ ]\w{39}$" test/.plugin-versions)
+          PLUGIN_GIT_REF=$(grep -oE "[^ ]\w{6}$" test/.plugin-versions)
           asdf plugin list --refs | grep "${PLUGIN_GIT_REF}" &&
           echo "[Passed] The plugin git ref in test/.plugin-versions matches the installed one."
