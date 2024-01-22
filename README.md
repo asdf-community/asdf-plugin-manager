@@ -30,14 +30,14 @@ Using `asdf-plugin-manager`, you can set asdf plugins Git URL and ref for securi
 [Asdf is a great universal version manager](https://tech.aabouzaid.com/2022/01/asdf-vm-a-universal-version-manager-tools.html).
 However, it lacks a secure and declarative method to manage its plugins. For example, you cannot pin a specific asdf plugin version, which means you will be easily hacked if one of the asdf plugins you use is compromised!
 
-[Many exist requests asking to fix that](https://github.com/asdf-vm/asdf/issues/1577), but no solution has been proposed in `asdf` upstream yet! (Last check: Aug 2023)
+[Many exist requests asking to fix that](https://github.com/asdf-vm/asdf/issues/1577), but no solution has been proposed in `asdf` upstream yet! (Last check: Jan 2024)
 
 Hence, `asdf-plugin-manager` fills the gap to manage asdf plugins securely and declaratively via `.plugin-versions` file.
 
 # Dependencies
 
 - [asdf-vm](https://asdf-vm.com/): Tested with `v0.12.0` but probably will work with older versions.
-- `bash`, `cat`, `grep`, `tr`, `cut`, `column`, `sed`: Generic POSIX utilities.
+- `bash`, `cat`, `grep`, `tr`, `cut`, `column`, `sed`, `git`: Generic utilities.
 - `ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME`: Set default name for the file with the list of managed plugins.
   Default: `.plugin-versions`.
 
