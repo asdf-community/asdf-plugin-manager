@@ -2,9 +2,10 @@
 
 set -eo pipefail
 
-VERSION=1.1.2
+VERSION=1.2.0
 PLUGIN_VERSIONS_FILENAME="${ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME:-.plugin-versions}"
 ADD_CLEAN="${ASDF_PLUGIN_MANAGER_ADD_CLEAN:-FALSE}"
+PLUGINS_REPOS_DIR="$(asdf info | grep ASDF_DATA_DIR | cut -d"=" -f2)/plugins"
 
 print_version() {
     echo "${VERSION}"
@@ -59,6 +60,13 @@ export_plugins() {
     asdf plugin-list --refs --urls | tr -s ' ' | cut -d ' ' -f 1,2,4 | column -t
 }
 
+# Mimic 'asdf plugin update' to avoid "fatal: couldn't find remote ref ...".
+checkout_plugin_ref() {
+    plugin_name="${1}"
+    plugin_ref="${2}"
+    git --git-dir "${PLUGINS_REPOS_DIR}/${plugin_name}/.git" checkout "${plugin_ref}" -q
+}
+
 list_plugins() {
     plugin_name=$1
     if [[ -n ${plugin_name} ]]; then
@@ -88,7 +96,7 @@ add_plugins() {
         asdf plugin add "${plugin_name}" "${plugin_url}"
         # TODO: Remove the plugin update once asdf supports adding plugin with git-ref.
         # https://github.com/asdf-vm/asdf/pull/1204
-        asdf plugin update "${plugin_name}" "${plugin_ref}"
+        checkout_plugin_ref "${plugin_name}" "${plugin_ref}"
         echo "[INFO] Done."
     done
 }

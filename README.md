@@ -30,14 +30,14 @@ Using `asdf-plugin-manager`, you can set asdf plugins Git URL and ref for securi
 [Asdf is a great universal version manager](https://tech.aabouzaid.com/2022/01/asdf-vm-a-universal-version-manager-tools.html).
 However, it lacks a secure and declarative method to manage its plugins. For example, you cannot pin a specific asdf plugin version, which means you will be easily hacked if one of the asdf plugins you use is compromised!
 
-[Many exist requests asking to fix that](https://github.com/asdf-vm/asdf/issues/1577), but no solution has been proposed in `asdf` upstream yet! (Last check: Aug 2023)
+[Many exist requests asking to fix that](https://github.com/asdf-vm/asdf/issues/1577), but no solution has been proposed in `asdf` upstream yet! (Last check: Jan 2024)
 
 Hence, `asdf-plugin-manager` fills the gap to manage asdf plugins securely and declaratively via `.plugin-versions` file.
 
 # Dependencies
 
 - [asdf-vm](https://asdf-vm.com/): Tested with `v0.12.0` but probably will work with older versions.
-- `bash`, `cat`, `grep`, `tr`, `cut`, `column`, `sed`: Generic POSIX utilities.
+- `bash`, `cat`, `grep`, `tr`, `cut`, `column`, `sed`, `git`: Generic utilities.
 - `ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME`: Set default name for the file with the list of managed plugins.
   Default: `.plugin-versions`.
 
@@ -52,17 +52,17 @@ First, setup `asdf-plugin-manager` as asdf plugin in asdf:
 ```shell
 asdf plugin add asdf-plugin-manager https://github.com/asdf-community/asdf-plugin-manager.git
 # Pin the asdf-plugin-manager version using git tag or even better using git hash which is immutable.
-asdf plugin update asdf-plugin-manager v1.1.2
+asdf plugin update asdf-plugin-manager v1.2.0
 ```
 
 Then, install the actual `asdf-plugin-manager` CLI:
 
 ```shell
 # Install specific version
-asdf install asdf-plugin-manager 1.1.2
+asdf install asdf-plugin-manager 1.2.0
 
 # Set a version globally (on your ~/.tool-versions file)
-asdf global asdf-plugin-manager 1.1.2
+asdf global asdf-plugin-manager 1.2.0
 
 # Now asdf-plugin-manager command is available
 asdf-plugin-manager version
