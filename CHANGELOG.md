@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/asdf-community/asdf-plugin-manager/compare/v1.1.1...v1.2.0) (2024-01-22)
+
+
+### Miscellaneous Chores
+
+* release 1.2.0 ([eaeb78c](https://github.com/asdf-community/asdf-plugin-manager/commit/eaeb78c7395930b942ef7b52418df3e85c597a3f))
+
 ## [1.1.1](https://github.com/asdf-community/asdf-plugin-manager/compare/v1.1.0...v1.1.1) (2023-09-04)
 
 
