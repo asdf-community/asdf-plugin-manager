@@ -2,10 +2,18 @@
 
 set -eo pipefail
 
-VERSION=1.2.0
+#
+# Vars.
+#
+
+VERSION=1.3.0
 PLUGIN_VERSIONS_FILENAME="${ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME:-.plugin-versions}"
 ADD_CLEAN="${ASDF_PLUGIN_MANAGER_ADD_CLEAN:-FALSE}"
 PLUGINS_REPOS_DIR="$(asdf info | grep ASDF_DATA_DIR | cut -d"=" -f2)/plugins"
+
+#
+# Functions.
+#
 
 print_version() {
     echo "${VERSION}"
@@ -128,19 +136,29 @@ update_plugins() {
     done
 }
 
-if [[ -z $1 ]]; then
+#
+# Main.
+#
+
+# Check basic args.
+case "$1" in
+help | -h | "")
+    print_help
+    ;;
+version | -n)
+    print_version
+    exit 0
+    ;;
+esac
+
+# Check if the plugin versions file exists.
+if ! test -f "$(print_plugin_versions_filename)"; then
+    echo -e "[ERROR] The '$(print_plugin_versions_filename)' file is not found. Check help for more details:\n"
     print_help
 fi
 
 while test -n "$1"; do
     case "$1" in
-    help | -h)
-        print_help
-        ;;
-    version | -v)
-        print_version
-        exit 0
-        ;;
     export)
         export_plugins
         ;;
