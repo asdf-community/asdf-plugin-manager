@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/asdf-community/asdf-plugin-manager/compare/v1.2.0...v1.3.0) (2024-02-11)
+
+
+### Features
+
+* check if .plugin-versions exists before parsing args ([#43](https://github.com/asdf-community/asdf-plugin-manager/issues/43)) ([a57c48f](https://github.com/asdf-community/asdf-plugin-manager/commit/a57c48f16a52ea3193f52b36b5f4a25bce9b0a74))
+
 ## [1.2.0](https://github.com/asdf-community/asdf-plugin-manager/compare/v1.1.1...v1.2.0) (2024-01-22)
 
 
