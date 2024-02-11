@@ -52,17 +52,17 @@ First, setup `asdf-plugin-manager` as asdf plugin in asdf:
 ```shell
 asdf plugin add asdf-plugin-manager https://github.com/asdf-community/asdf-plugin-manager.git
 # Pin the asdf-plugin-manager version using git tag or even better using git hash which is immutable.
-asdf plugin update asdf-plugin-manager v1.2.0
+asdf plugin update asdf-plugin-manager v1.3.0
 ```
 
 Then, install the actual `asdf-plugin-manager` CLI:
 
 ```shell
 # Install specific version
-asdf install asdf-plugin-manager 1.2.0
+asdf install asdf-plugin-manager 1.3.0
 
 # Set a version globally (on your ~/.tool-versions file)
-asdf global asdf-plugin-manager 1.2.0
+asdf global asdf-plugin-manager 1.3.0
 
 # Now asdf-plugin-manager command is available
 asdf-plugin-manager version
