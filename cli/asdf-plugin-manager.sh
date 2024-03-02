@@ -121,7 +121,7 @@ update_plugins() {
 
         if [[ "${plugin_ref_before_update}" == "${plugin_ref_after_update}" ]]; then
             echo "[INFO] The plugin \"${plugin_name}\" with git-ref \"${plugin_ref_managed}\" is already up-to-date."
-            exit 0
+            continue
         fi
 
         echo "[INFO] Updating git-ref in plugin version file: $(print_plugin_versions_filename)"
