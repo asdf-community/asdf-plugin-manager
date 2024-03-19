@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/asdf-community/asdf-plugin-manager/compare/v1.3.0...v1.3.1) (2024-03-19)
+
+
+### Bug Fixes
+
+* update all plugins even if any plugin is already updated ([#45](https://github.com/asdf-community/asdf-plugin-manager/issues/45)) ([4950f98](https://github.com/asdf-community/asdf-plugin-manager/commit/4950f983010c977bc5db50cdf6b57c7c48924548)), closes [#38](https://github.com/asdf-community/asdf-plugin-manager/issues/38)
+
 ## [1.3.0](https://github.com/asdf-community/asdf-plugin-manager/compare/v1.2.0...v1.3.0) (2024-02-11)
 
 
