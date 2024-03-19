@@ -24,5 +24,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          sed -i "s/__VERSION__/$(cat version.txt)/g" cli/asdf-plugin-manager.sh
           cp -a cli/asdf-plugin-manager.sh asdf-plugin-manager-${{ steps.release.outputs.tag_name }}.sh
           gh release upload ${{ steps.release.outputs.tag_name }} asdf-plugin-manager-${{ steps.release.outputs.tag_name }}.sh
