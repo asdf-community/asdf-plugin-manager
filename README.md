@@ -9,7 +9,7 @@
 
 Manage [asdf](https://asdf-vm.com) plugins securely and declaratively.
 
-Using `asdf-plugin-manager`, you can set asdf plugins Git URL and ref for security and integrity. So it's the only plugin you need to validate manually, and the `.plugin-versions` file will be the source of truth for asdf plugins. Check [example](#example) for more details.
+Using `asdf-plugin-manager`, you can set asdf plugins Git URL and ref for security and integrity. So it's the only plugin you need to validate manually, and the `.plugin-versions` file will be the source of truth for asdf plugins. Check the [example](#example) for more details.
 
 **Yes, this is an asdf plugin to manage asdf plugins!**
 </div>
@@ -38,7 +38,7 @@ Hence, `asdf-plugin-manager` fills the gap to manage asdf plugins securely and d
 
 - [asdf-vm](https://asdf-vm.com/): Tested with `v0.12.0` but probably will work with older versions.
 - `bash`, `cat`, `grep`, `tr`, `cut`, `column`, `sed`, `git`: Generic utilities.
-- `ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME`: Set default name for the file with the list of managed plugins.
+- `ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME`: Set the default name for the file with the list of managed plugins.
   Default: `.plugin-versions`.
 
 # Install
@@ -52,17 +52,17 @@ First, setup `asdf-plugin-manager` as asdf plugin in asdf:
 ```shell
 asdf plugin add asdf-plugin-manager https://github.com/asdf-community/asdf-plugin-manager.git
 # Pin the asdf-plugin-manager version using git tag or even better using git hash which is immutable.
-asdf plugin update asdf-plugin-manager v1.3.0
+asdf plugin update asdf-plugin-manager v1.3.1
 ```
 
 Then, install the actual `asdf-plugin-manager` CLI:
 
 ```shell
 # Install specific version
-asdf install asdf-plugin-manager 1.3.0
+asdf install asdf-plugin-manager 1.3.1
 
 # Set a version globally (on your ~/.tool-versions file)
-asdf global asdf-plugin-manager 1.3.0
+asdf global asdf-plugin-manager 1.3.1
 
 # Now asdf-plugin-manager command is available
 asdf-plugin-manager version
@@ -71,7 +71,7 @@ asdf-plugin-manager version
 # Example
 
 Using `asdf-plugin-manager`, the `.plugin-versions` file will be the source of truth for asdf plugins.
-Its syntax as follows:
+Its syntax is as follows:
 
 ```
 # plugin-name  git-url                                               git-ref (hash, tag, or branch)
@@ -79,7 +79,7 @@ golang         https://github.com/asdf-community/asdf-golang.git     d8dec15
 terraform      https://github.com/asdf-community/asdf-hashicorp.git  c048526
 ```
 
-You can also export the current added plugins to be managed by `asdf-plugin-manager`:
+You can also export the currently added plugins to be managed by `asdf-plugin-manager`:
 
 ```shell
 asdf-plugin-manager export > .plugin-versions
@@ -101,7 +101,7 @@ asdf-plugin-manager add golang
 
 # Parameters
 
-The following all `asdf-plugin-manager` parameters:
+The following are all `asdf-plugin-manager` parameters:
 
 ```
 asdf-plugin-manager help                 : Print this help message
