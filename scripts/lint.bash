@@ -5,5 +5,7 @@ shellcheck --shell=bash --external-sources \
     lib/* \
     scripts/*
 
+# shellcheck disable=SC2046
+# shellcheck disable=SC2156
 shfmt -i 4 --language-dialect bash --diff \
-	"$(find . -not -path './.git*' -type f -exec file {} \; | grep 'shell script' | cut -d: -f1)"
+    $(find . -not -path './.git*' -type f -exec sh -c "file '{}' | grep -q 'shell script'" \; -print)
