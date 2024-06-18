@@ -72,13 +72,13 @@ export_plugins() {
 checkout_plugin_ref() {
     local plugin_name
     local plugin_ref
-	local git_dir
+    local git_dir
 
     plugin_name="${1}"
     plugin_ref="${2}"
     git_dir="${PLUGINS_REPOS_DIR}/${plugin_name}"
 
-    git -C "${git_dir}" checkout  "${plugin_ref}"
+    git -C "${git_dir}" checkout "${plugin_ref}"
 }
 
 list_plugins() {
