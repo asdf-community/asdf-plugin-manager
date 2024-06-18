@@ -57,11 +57,17 @@ print_git_compare_url() {
     local plugin_ref_current="$2"
     local plugin_ref_head="$3"
 
-    if $(echo "${provider_url}" | grep -q 'github'); then
-        echo "${plugin_url%.*}/compare/${plugin_ref_current}...${plugin_ref_head}"
-    elif $(echo "${provider_url}" | grep -q 'gitlab'); then
-        echo "${plugin_url%.*}/-/compare/${plugin_ref_current}...${plugin_ref_head}"
-    fi
+    case "${provider_url}" in
+    *github*)
+        echo "${provider_url%.*}/compare/${plugin_ref_current}...${plugin_ref_head}"
+        ;;
+    *gitlab*)
+        echo "${provider_url%.*}/-/compare/${plugin_ref_current}...${plugin_ref_head}"
+        ;;
+    *)
+        echo "Unknown provider: ${provider_url}"
+        ;;
+    esac
 }
 
 export_plugins() {
