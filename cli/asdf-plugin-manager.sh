@@ -84,7 +84,10 @@ checkout_plugin_ref() {
     plugin_ref="${2}"
     git_dir="${PLUGINS_REPOS_DIR}/${plugin_name}"
 
-    git -C "${git_dir}" checkout "${plugin_ref}"
+    git \
+        --git-dir "${git_dir}/.git" \
+        --work-tree "${git_dir}" \
+        checkout "${plugin_ref}"
 }
 
 list_plugins() {
