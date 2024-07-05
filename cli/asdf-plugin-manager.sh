@@ -57,11 +57,17 @@ print_git_compare_url() {
     local plugin_ref_current="$2"
     local plugin_ref_head="$3"
 
-    if $(echo "${provider_url}" | grep -q 'github'); then
-        echo "${plugin_url%.*}/compare/${plugin_ref_current}...${plugin_ref_head}"
-    elif $(echo "${provider_url}" | grep -q 'gitlab'); then
-        echo "${plugin_url%.*}/-/compare/${plugin_ref_current}...${plugin_ref_head}"
-    fi
+    case "${provider_url}" in
+    *github*)
+        echo "${provider_url%.*}/compare/${plugin_ref_current}...${plugin_ref_head}"
+        ;;
+    *gitlab*)
+        echo "${provider_url%.*}/-/compare/${plugin_ref_current}...${plugin_ref_head}"
+        ;;
+    *)
+        echo "Unknown provider: ${provider_url}"
+        ;;
+    esac
 }
 
 export_plugins() {
@@ -70,9 +76,18 @@ export_plugins() {
 
 # Mimic 'asdf plugin update' to avoid "fatal: couldn't find remote ref ...".
 checkout_plugin_ref() {
+    local plugin_name
+    local plugin_ref
+    local git_dir
+
     plugin_name="${1}"
     plugin_ref="${2}"
-    git --git-dir "${PLUGINS_REPOS_DIR}/${plugin_name}/.git" checkout "${plugin_ref}" -q
+    git_dir="${PLUGINS_REPOS_DIR}/${plugin_name}"
+
+    git \
+        --git-dir "${git_dir}/.git" \
+        --work-tree "${git_dir}" \
+        checkout "${plugin_ref}"
 }
 
 list_plugins() {
