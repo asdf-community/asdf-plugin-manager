@@ -1,22 +1,30 @@
 <div align="center">
 
-<!-- omit in toc -->
-# ASDF Plugin Manager [![Build](https://github.com/asdf-community/asdf-plugin-manager/actions/workflows/build.yml/badge.svg)](https://github.com/asdf-community/asdf-plugin-manager/actions/workflows/build.yml) [![Lint](https://github.com/asdf-community/asdf-plugin-manager/actions/workflows/lint.yml/badge.svg)](https://github.com/asdf-community/asdf-plugin-manager/actions/workflows/lint.yml)
-
 <p align="center">
-    <img src="img/asdf-plugin-manager.png" width="100%">
+  <a href="https://devopshive.net/" style="display: block; padding: 1em 0;">
+    <img width="128px" alt="ASDF Plugin Manager Logo" border="0" src="img/asdf-plugin-manager-logo.svg"/>
+  </a>
 </p>
+
+<h1 >ASDF Plugin Manager</h1>
+<p><b>
 
 Manage [asdf](https://asdf-vm.com) plugins securely and declaratively.
 
-Using `asdf-plugin-manager`, you can set asdf plugins Git URL and ref for security and integrity. So it's the only plugin you need to validate manually, and the `.plugin-versions` file will be the source of truth for asdf plugins. Check the [example](#example) for more details.
+</b></p>
 
-**Yes, this is an asdf plugin to manage asdf plugins!**
+[![Build](https://github.com/asdf-community/asdf-plugin-manager/actions/workflows/build.yml/badge.svg)](https://github.com/asdf-community/asdf-plugin-manager/actions/workflows/build.yml) [![Lint](https://github.com/asdf-community/asdf-plugin-manager/actions/workflows/lint.yml/badge.svg)](https://github.com/asdf-community/asdf-plugin-manager/actions/workflows/lint.yml)
+
 </div>
+
+# Overview
+
+ASDF Plugin Manager allows you to pin `asdf` plugins info like Git URL and ref for security and integrity. So, it's the only plugin you need to validate manually, and the `.plugin-versions` file will be the source of truth for asdf plugins. Check the [example](#example) for more details.
 
 <!-- omit in toc -->
 # Contents
 
+- [Overview](#overview)
 - [Why?](#why)
 - [Dependencies](#dependencies)
 - [Install](#install)
