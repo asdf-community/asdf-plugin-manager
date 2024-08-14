@@ -9,7 +9,7 @@
 <h1 >ASDF Plugin Manager</h1>
 <p><b>
 
-Manage [asdf](https://asdf-vm.com) plugins securely and declaratively.
+Let the Kraken manage your [asdf](https://asdf-vm.com) plugins securely and declaratively!
 
 </b></p>
 
@@ -19,7 +19,7 @@ Manage [asdf](https://asdf-vm.com) plugins securely and declaratively.
 
 # Overview
 
-ASDF Plugin Manager allows you to pin `asdf` plugins info like Git URL and ref for security and integrity. So, it's the only plugin you need to validate manually, and the `.plugin-versions` file will be the source of truth for asdf plugins. Check the [example](#example) for more details.
+ASDF Plugin Manager allows you to pin `asdf` plugin info like Git URL and ref for security and integrity. So, it's the only plugin you need to validate manually, and the `.plugin-versions` file will be the source of truth for all other asdf plugins. Check the [example](#example) for more details.
 
 <!-- omit in toc -->
 # Contents
@@ -132,4 +132,4 @@ Contributions of any kind are welcome! See the [contributing guide](contributing
 
 # License
 
-See [LICENSE](LICENSE) © [Ahmed AbouZaid](https://github.com/aabouzaid/).
+This project is by [DevOps Hive](https://devopshive.net/) and licensed under an open-source license. For more details, check  [LICENSE](LICENSE).
