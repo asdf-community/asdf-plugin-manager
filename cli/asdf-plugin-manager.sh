@@ -72,7 +72,7 @@ export_plugins() {
 checkout_plugin_ref() {
     plugin_name="${1}"
     plugin_ref="${2}"
-    git --git-dir "${PLUGINS_REPOS_DIR}/${plugin_name}/.git" checkout "${plugin_ref}" -q
+    git --git-dir "${PLUGINS_REPOS_DIR}/${plugin_name}/.git" --work-tree "${PLUGINS_REPOS_DIR}/${plugin_name}" checkout "${plugin_ref}" -q
 }
 
 list_plugins() {
