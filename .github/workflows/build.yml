@@ -28,16 +28,58 @@ jobs:
           asdf plugin list --urls --refs
           asdf global asdf-plugin-manager latest
           asdf plugin remove asdf-plugin-manager
-      - name: Test asdf-plugin-manager cli
+      - name: Setup asdf-plugin-manager cli
         run: |
           cp -a cli/asdf-plugin-manager.sh /usr/local/bin/asdf-plugin-manager
-          cd test
+      - name: Install | Test asdf-plugin-manager cli
+        working-directory: test
+        env:
+          ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME: ".plugin-versions"
+        run: |
+          set -euox pipefail
           asdf-plugin-manager list
           asdf-plugin-manager add-all
           asdf plugin list --refs
-      - name: Validate installed plugins
+          # Validate.
+          # I should install the managed plugin with the correct git ref.
+          PLUGIN_GIT_REF="$(grep -oE "[^ ]\w{6}$" "${ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME}")"
+          asdf plugin list --refs | grep "${PLUGIN_GIT_REF}"
+          echo "[Passed] The plugin git ref in ${ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME} matches the installed one."
+      - name: Update | Test asdf-plugin-manager cli
+        working-directory: test
+        env:
+          ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME: ".plugin-versions.update"
         run: |
           set -euox pipefail
-          PLUGIN_GIT_REF=$(grep -oE "[^ ]\w{6}$" test/.plugin-versions)
-          asdf plugin list --refs | grep "${PLUGIN_GIT_REF}" &&
-          echo "[Passed] The plugin git ref in test/.plugin-versions matches the installed one."
+          asdf plugin list --refs
+          asdf-plugin-manager update-all
+          # Validate.
+          # It should get the latest commit in the plugin repo.
+          PLUGIN_GIT_URL="$(awk '/^venom/ {print $2}' "${ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME}")"
+          PLUGIN_GIT_REF_UPDATED="$(git ls-remote "${PLUGIN_GIT_URL}" HEAD | head -c 7)"
+          asdf plugin list --refs | grep "${PLUGIN_GIT_REF_UPDATED}"
+          echo "[Passed] The plugin git ref in ${ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME} updated to latest."
+      - name: Export | Test asdf-plugin-manager cli
+        working-directory: test
+        run: |
+          set -euox pipefail
+          asdf plugin add jq
+          asdf plugin list --refs --urls |
+            awk '{OFS = ","; print $1,$2,$4}' | tee asdf-plugin.csv
+          asdf-plugin-manager export |
+            awk '{OFS = ","; print $1,$2,$3}' | tee asdf-plugin-manager.csv
+          # Validate.
+          # It should export all installed plugins.
+          diff asdf-plugin.csv asdf-plugin-manager.csv
+          echo "[Passed] All installed plugins have been exported."
+      - name: Remove | Test asdf-plugin-manager cli
+        working-directory: test
+        run: |
+          set -euox pipefail
+          asdf plugin add jq
+          asdf plugin list
+          asdf-plugin-manager remove-all
+          # Validate.
+          # It should only remove the managed plugins.
+          asdf plugin list | grep "jq"
+          echo "[Passed] All managed plugins have been removed."
