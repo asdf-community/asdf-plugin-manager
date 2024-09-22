@@ -125,7 +125,9 @@ update_plugins() {
         fi
 
         echo "[INFO] Updating git-ref in plugin version file: $(print_plugin_versions_filename)"
-        sed -i "/^\b${plugin_name}\b/ s/${plugin_ref_managed}/${plugin_ref_after_update}/" "$(print_plugin_versions_filename)"
+        cat "$(print_plugin_versions_filename)" |
+            sed "/^\b${plugin_name}\b/ s/${plugin_ref_managed}/${plugin_ref_after_update}/" |
+            tee "$(print_plugin_versions_filename)"
 
         echo '!!!'
         echo "[CAUTION] Please review the changes since last update:"
