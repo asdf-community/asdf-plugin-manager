@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.4.0](https://github.com/asdf-community/asdf-plugin-manager/compare/v1.3.1...v1.4.0) (2024-09-23)
+
+
+### Features
+
+* notify user if the plugin git url doesn't match what in .plugin-versions ([#65](https://github.com/asdf-community/asdf-plugin-manager/issues/65)) ([4be90c2](https://github.com/asdf-community/asdf-plugin-manager/commit/4be90c2633e6697db853420e4a35304f84fbbafb))
+
+
+### Bug Fixes
+
+* ensure asdf-plugin-manager works in expected worktree ([#56](https://github.com/asdf-community/asdf-plugin-manager/issues/56)) ([309be80](https://github.com/asdf-community/asdf-plugin-manager/commit/309be80421c6cfdd0237ab18a39422a40f98e229))
+* use macos compatible sed syntax ([#63](https://github.com/asdf-community/asdf-plugin-manager/issues/63)) ([4de7c98](https://github.com/asdf-community/asdf-plugin-manager/commit/4de7c981f35b15360ae5a0adaf8d65460495e4d7))
+
 ## [1.3.1](https://github.com/asdf-community/asdf-plugin-manager/compare/v1.3.0...v1.3.1) (2024-03-19)
 
 
