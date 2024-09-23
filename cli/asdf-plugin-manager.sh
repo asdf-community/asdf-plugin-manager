@@ -93,14 +93,34 @@ remove_plugins() {
     done
 }
 
+validate_plugin_git_url() {
+    local plugin_name="$1"
+    local plugin_url="$2"
+    plugin_url_installed="$(asdf plugin list --refs --urls | sed -n "/${plugin_name}/p" | tr -s ' ' | cut -d " " -f 2)"
+    if [[ -n "${plugin_url_installed}" && "${plugin_url_installed}" != "${plugin_url}" ]]; then
+        printf "%s %s %s\n" \
+            "[CRIT] The managed plugin ${plugin_name} repo is ${plugin_url}" \
+            "which differs from the currency installed one ${plugin_url_installed}!" \
+            "This probably implies a security threat!"
+    fi
+}
+
+remove_plugin_or_notify() {
+    local plugin_name="$1"
+    local plugin_url="$2"
+    if [[ "$(echo ${ADD_CLEAN} | tr '[:upper:]' '[:lower:]')" == 'true' ]]; then
+        remove_plugins "$(list_plugins ${plugin_name})"
+    else
+        validate_plugin_git_url "${plugin_name}" "${plugin_url}"
+    fi
+}
+
 add_plugins() {
     local managed_plugins="$1"
     echo "${managed_plugins}" | while read managed_plugin; do
         read -r plugin_name plugin_url plugin_ref < <(echo ${managed_plugin})
         echo "[INFO] Adding: ${plugin_name} ${plugin_url} ${plugin_ref}"
-        if [[ "$(echo ${ADD_CLEAN} | tr '[:upper:]' '[:lower:]')" == 'true' ]]; then
-            remove_plugins "$(list_plugins ${plugin_name})"
-        fi
+        remove_plugin_or_notify "${plugin_name}" "${plugin_url}"
         asdf plugin add "${plugin_name}" "${plugin_url}"
         # TODO: Remove the plugin update once asdf supports adding plugin with git-ref.
         # https://github.com/asdf-vm/asdf/pull/1204
@@ -130,7 +150,7 @@ update_plugins() {
             tee "$(print_plugin_versions_filename)"
 
         echo '!!!'
-        echo "[CAUTION] Please review the changes since last update:"
+        echo "[CRIT] Please review the changes since last update:"
         echo "$(print_git_compare_url ${plugin_url} ${plugin_ref_managed} ${plugin_ref_after_update})"
         echo '!!!'
 
