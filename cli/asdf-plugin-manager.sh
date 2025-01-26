@@ -145,9 +145,9 @@ update_plugins() {
         read -r plugin_name plugin_url plugin_ref_managed < <(echo ${managed_plugin})
 
         echo "[INFO] Updating: ${plugin_name} ${plugin_url} ${plugin_ref_managed} to HEAD"
-        plugin_ref_before_update="$(export_plugins | egrep "^\b${plugin_name}\b\s+" | sed -e 's/^.*\s//')"
+        plugin_ref_before_update="$(export_plugins | grep -E "^\b${plugin_name}\b\s+" | sed -e 's/^.*\s//')"
         asdf plugin update "${plugin_name}"
-        plugin_ref_after_update="$(export_plugins | egrep "^\b${plugin_name}\b\s+" | sed -e 's/^.*\s//')"
+        plugin_ref_after_update="$(export_plugins | grep -E "^\b${plugin_name}\b\s+" | sed -e 's/^.*\s//')"
 
         if [[ "${plugin_ref_before_update}" == "${plugin_ref_after_update}" ]]; then
             echo "[INFO] The plugin \"${plugin_name}\" with git-ref \"${plugin_ref_managed}\" is already up-to-date."
