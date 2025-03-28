@@ -49,6 +49,15 @@ Hence, `asdf-plugin-manager` fills the gap to manage asdf plugins securely and d
 - `ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME`: Set the default name for the file with the list of managed plugins.
   Default: `.plugin-versions`.
 
+# Compatibility
+
+Since the release of ASDF `v0.16.0` there have been a number of [breaking changes](https://asdf-vm.com/guide/upgrading-to-v0-16.html) as it was [completely rewritten](https://github.com/asdf-vm/asdf/releases/tag/v0.16.0). Use the table below to determine which version of `asdf-plugin-manager` to use.
+
+| ASDF Version | ASDF Plugin Manager |
+| ------------ | ------------------- |
+| `v0.15.0` and earlier | `v1.4.0` |
+| `v0.16.0` and newer | Newer than `v1.4.0` |
+
 # Install
 
 > **Note**
