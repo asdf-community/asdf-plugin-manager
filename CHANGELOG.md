@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.4.1](https://github.com/asdf-community/asdf-plugin-manager/compare/v1.4.0...v1.4.1) (2025-05-30)
+## [1.5.0](https://github.com/asdf-community/asdf-plugin-manager/compare/v1.4.0...v1.5.0) (2025-05-30)
 
 
 ### Refactors
