@@ -1,3 +1,6 @@
+# This workflow has 2 roles:
+# - Create the release PR.
+# - Create the release tag and artifact (once the release PR is merged).
 name: Release
 
 on:
@@ -9,16 +12,24 @@ permissions:
   actions: write
   contents: write
   pull-requests: write
+  issues: write
 
 jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: GoogleCloudPlatform/release-please-action@v4
+      - name: Run release-please
+        uses: GoogleCloudPlatform/release-please-action@v4
         id: release
         with:
-          release-type: simple
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Print release-please outputs
+        env:
+          RELEASE_PLEASE_OUTPUTS: ${{ toJson(steps.release.outputs) }}
+        run: |
+          echo "${RELEASE_PLEASE_OUTPUTS}" | jq
       - name: Upload Release Artifact
         if: ${{ steps.release.outputs.release_created }}
         env:
