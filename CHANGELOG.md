@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.5.0](https://github.com/asdf-community/asdf-plugin-manager/compare/v1.4.0...v1.5.0) (2025-05-30)
+
+
+### Miscellaneous
+
+* release 1.5.0 ([b311465](https://github.com/asdf-community/asdf-plugin-manager/commit/b3114657533bd3c452278af7d6878bc6a2e0d9ab))
+
+
+### Refactors
+
+* update for compatibility with asdf v0.16 ([#71](https://github.com/asdf-community/asdf-plugin-manager/issues/71)) ([c279829](https://github.com/asdf-community/asdf-plugin-manager/commit/c2798294e3a5f84200ae607e3ebeabe41ed761a8))
+* use grep -E instead of egrep ([#70](https://github.com/asdf-community/asdf-plugin-manager/issues/70)) ([00ba8ab](https://github.com/asdf-community/asdf-plugin-manager/commit/00ba8ab35e1e8eb5e6506d2967dfc9c002691fee))
+
+
+### CI/CD
+
+* auto update version in readme and cli ([#76](https://github.com/asdf-community/asdf-plugin-manager/issues/76)) ([bf686ea](https://github.com/asdf-community/asdf-plugin-manager/commit/bf686eabf16391b00639a98c74fd53efe227570c))
+* use release-please config ([#73](https://github.com/asdf-community/asdf-plugin-manager/issues/73)) ([796bd01](https://github.com/asdf-community/asdf-plugin-manager/commit/796bd01984009caa6b29c08694e3ff37457106d8))
+
 ## [1.4.0](https://github.com/asdf-community/asdf-plugin-manager/compare/v1.3.1...v1.4.0) (2024-09-23)
 
 
