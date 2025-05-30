@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.1](https://github.com/asdf-community/asdf-plugin-manager/compare/v1.4.0...v1.4.1) (2025-05-30)
+
+
+### Refactors
+
+* update for compatibility with asdf v0.16 ([#71](https://github.com/asdf-community/asdf-plugin-manager/issues/71)) ([c279829](https://github.com/asdf-community/asdf-plugin-manager/commit/c2798294e3a5f84200ae607e3ebeabe41ed761a8))
+* use grep -E instead of egrep ([#70](https://github.com/asdf-community/asdf-plugin-manager/issues/70)) ([00ba8ab](https://github.com/asdf-community/asdf-plugin-manager/commit/00ba8ab35e1e8eb5e6506d2967dfc9c002691fee))
+
 ## [1.4.0](https://github.com/asdf-community/asdf-plugin-manager/compare/v1.3.1...v1.4.0) (2024-09-23)
 
 
