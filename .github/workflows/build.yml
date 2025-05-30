@@ -16,17 +16,20 @@ jobs:
           - macos-latest
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Run asdf plugin test
-        uses: asdf-vm/actions/plugin-test@v3
+      - name: Install asdf and run plugin test
+        uses: asdf-vm/actions/plugin-test@v4
         with:
           command: asdf-plugin-manager version
+      - name: Print asdf version
+        run: |
+          asdf version
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Test asdf-plugin-manager plugin
         run: |
           asdf plugin add asdf-plugin-manager .
           asdf install asdf-plugin-manager latest
           asdf plugin list --urls --refs
-          asdf global asdf-plugin-manager latest
+          asdf set asdf-plugin-manager latest
           asdf plugin remove asdf-plugin-manager
       - name: Setup asdf-plugin-manager cli
         run: |
@@ -41,7 +44,7 @@ jobs:
           asdf-plugin-manager add-all
           asdf plugin list --refs
           # Validate.
-          # I should install the managed plugin with the correct git ref.
+          # It should install the managed plugin with the correct git ref.
           PLUGIN_GIT_REF="$(grep -oE "[^ ]\w{6}$" "${ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME}")"
           asdf plugin list --refs | grep "${PLUGIN_GIT_REF}"
           echo "[Passed] The plugin git ref in ${ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME} matches the installed one."

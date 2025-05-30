@@ -67,24 +67,28 @@ Since the release of ASDF `v0.16.0` there have been a number of [breaking change
 
 First, setup `asdf-plugin-manager` as asdf plugin in asdf:
 
+<!-- x-release-please-start-version -->
 ```shell
 asdf plugin add asdf-plugin-manager https://github.com/asdf-community/asdf-plugin-manager.git
 # Pin the asdf-plugin-manager version using git tag or even better using git hash which is immutable.
 asdf plugin update asdf-plugin-manager v1.3.1
 ```
+<!-- x-release-please-end -->
 
 Then, install the actual `asdf-plugin-manager` CLI:
 
+<!-- x-release-please-start-version -->
 ```shell
 # Install specific version
 asdf install asdf-plugin-manager 1.3.1
 
-# Set a version globally (on your ~/.tool-versions file)
-asdf global asdf-plugin-manager 1.3.1
+# Set the plugin version (on your ~/.tool-versions file)
+asdf set asdf-plugin-manager 1.3.1
 
 # Now asdf-plugin-manager command is available
 asdf-plugin-manager version
 ```
+<!-- x-release-please-end -->
 
 # Example
 

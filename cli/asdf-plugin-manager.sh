@@ -6,7 +6,9 @@ set -eo pipefail
 # Vars.
 #
 
-VERSION=__VERSION__
+# x-release-please-start-version
+VERSION=1.4.0
+# x-release-please-end
 PLUGIN_VERSIONS_FILENAME="${ASDF_PLUGIN_MANAGER_PLUGIN_VERSIONS_FILENAME:-.plugin-versions}"
 ADD_CLEAN="${ASDF_PLUGIN_MANAGER_ADD_CLEAN:-FALSE}"
 PLUGINS_REPOS_DIR="$(asdf info | grep ASDF_DATA_DIR | cut -d"=" -f2)/plugins"

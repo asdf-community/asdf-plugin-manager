@@ -35,9 +35,25 @@
             "type": "refactor",
             "section": "Refactors",
             "hidden": false
+        },
+        {
+            "type": "ci",
+            "section": "CI/CD",
+            "hidden": false
         }
     ],
     "packages": {
-        ".": {}
+        ".": {
+            "extra-files": [
+                {
+                    "type": "generic",
+                    "path": "README.md"
+                },
+                {
+                    "type": "generic",
+                    "path": "cli/asdf-plugin-manager.sh"
+                }
+            ]
+        }
     }
 }
