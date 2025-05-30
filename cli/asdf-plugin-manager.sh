@@ -71,7 +71,7 @@ print_git_compare_url() {
 }
 
 export_plugins() {
-    asdf plugin-list --refs --urls | tr -s ' ' | cut -d ' ' -f 1,2,4 | column -t
+    asdf plugin list --refs --urls | tr -s ' ' | cut -d ' ' -f 1,2,4 | column -t
 }
 
 # Mimic 'asdf plugin update' to avoid "fatal: couldn't find remote ref ...".
