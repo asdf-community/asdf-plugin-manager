@@ -27,6 +27,7 @@ ASDF Plugin Manager allows you to pin `asdf` plugin info like Git URL and ref fo
 - [Overview](#overview)
 - [Why?](#why)
 - [Dependencies](#dependencies)
+- [Compatibility](#compatibility)
 - [Install](#install)
 - [Example](#example)
 - [Parameters](#parameters)
@@ -53,10 +54,10 @@ Hence, `asdf-plugin-manager` fills the gap to manage asdf plugins securely and d
 
 Since the release of ASDF `v0.16.0` there have been a number of [breaking changes](https://asdf-vm.com/guide/upgrading-to-v0-16.html) as it was [completely rewritten](https://github.com/asdf-vm/asdf/releases/tag/v0.16.0). Use the table below to determine which version of `asdf-plugin-manager` to use.
 
-| ASDF Version | ASDF Plugin Manager |
-| ------------ | ------------------- |
-| `v0.15.0` and earlier | `v1.4.0` |
-| `v0.16.0` and newer | Newer than `v1.4.0` |
+| ASDF Version           | Compatible Plugin Manager Version |
+|------------------------|-----------------------------------|
+| v0.15.0 (or older)     | v1.4.0 (or older)                 |
+| v0.16.0 (or newer)     | v1.5.0 (or newer)                 |
 
 # Install
 
