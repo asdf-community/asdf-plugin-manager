@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/asdf-community/asdf-plugin-manager/compare/v1.5.0...v1.5.1) (2025-08-24)
+
+
+### CI/CD
+
+* use gitref in asdf-vm/actions/plugin-test ([f1cc739](https://github.com/asdf-community/asdf-plugin-manager/commit/f1cc7390168e10e2f7ebc044293957fe72009d5b))
+
 ## [1.5.0](https://github.com/asdf-community/asdf-plugin-manager/compare/v1.4.0...v1.5.0) (2025-05-30)
 
 
