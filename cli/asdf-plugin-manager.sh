@@ -108,7 +108,7 @@ remove_plugins() {
 validate_plugin_git_url() {
     local plugin_name="$1"
     local plugin_url="$2"
-    plugin_url_installed="$(asdf plugin list --refs --urls | sed -n "/${plugin_name}/p" | tr -s ' ' | cut -d " " -f 2)"
+    plugin_url_installed="$(asdf plugin list --refs --urls | sed -n "/${plugin_name}/p" | tr -s '[:blank:]' | cut -f 2)"
     if [[ -n "${plugin_url_installed}" && "${plugin_url_installed}" != "${plugin_url}" ]]; then
         printf "%s %s %s\n" \
             "[CRIT] The managed plugin ${plugin_name} repo is ${plugin_url}" \
